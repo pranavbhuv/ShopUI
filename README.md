@@ -1,4 +1,5 @@
 # ShopUI
+First Public, functioning ShopUI!
 A ShopUI, written by Quiv!
 
 This is my first UI, plugin, I hope you enjoy it!
