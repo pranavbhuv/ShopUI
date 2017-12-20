@@ -455,19 +455,54 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $this->itemId = 1;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
                     break;
                 case 2:
-                    EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    $this->itemId = 17;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
                     break;
                 case 3:
-                    EconomyAPI::getInstance()->reduceMoney($player, 2000);
+                    $this->itemId = 20;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
                     break;
                 case 4:
-                    EconomyAPI::getInstance()->reduceMoney($player, 1000);
+                    $this->itemId = 24;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
                     break;
                 case 5:
-                    EconomyAPI::getInstance()->reduceMoney($player, 1000);
+                    $this->itemId = 45;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    break;
+                case 6:
+                    $this->itemId = 98;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    break;
+                case 7:
+                    $this->itemId = 155;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    break;
+                case 8:
+                    $this->itemId = 80;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    break;
+                case 9:
+                    $this->itemId = 44;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    break;
+                case 10:
+                    $this->itemId = 47;
+                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
                     break;
             }
         });
@@ -477,11 +512,15 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $money = $eco->myMoney($name);
         $form->setContent("Your Money: " . $money);
         $form->addButton("Back, to main Menu!");
-        $form->addButton("DRAGON : 10 000$", 1, "https://img4.hostingpics.net/pics/436796skulldragon.png");
-        $form->addButton("WETHER : 5 000$", 1, "https://img4.hostingpics.net/pics/826437skullwither.png");
-        $form->addButton("CREEPER : 2 000$", 1, "https://img4.hostingpics.net/pics/556676skullcreeper.png");
-        $form->addButton("ZOMBIE : 1 000$", 1, "https://img4.hostingpics.net/pics/415562skullzombie.png");
-        $form->addButton("SKELETON : 1 000$", 1, "https://img4.hostingpics.net/pics/589367skullskeleton.png");
+        $form->addButton("Stone : $25000", 1, "textures/items/stone");
+        $form->addButton("Oak Logs : $25000", 1, "textures/items/log");
+        $form->addButton("Glass : $25000", 1, "textures/items/glass");
+        $form->addButton("Sandstone : $25000", 1, "textures/items/sandstone");
+        $form->addButton("Stone Bricks : $25000", 1, "textures/items/bricks");
+        $form->addButton("Quartz : $25000", 1, "textures/items/quartz_block");
+        $form->addButton("Snow : $25000", 1, "textures/items/snow");
+        $form->addButton("Stone Slab : $25000", 1, "textures/items/stone_slab");
+        $form->addButton("Shelf : $25000", 1, "textures/items/bookshelf");
         $form->sendToPlayer($player);
     }
 }
