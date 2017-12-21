@@ -1,7 +1,5 @@
 <?php
-
 namespace QuiverlyRivalry;
-
 # Main
 use pocketmine\{Player, Server};
 use pocketmine\plugin\PluginBase;
@@ -23,14 +21,11 @@ use jojoe77777\FormAPI;
 use onebone\economyapi\EconomyAPI;
 
 class QuiverlyRivalry extends PluginBase implements Listener{
-
     public $nomoney = TextFormat::RED . "you do not have enough money!";
-
     public function onEnable(){
         $this->getLogger()->info("ShopUI by Quiverly! Remember I am a developer for hire!");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
-
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
         $player = $sender->getPlayer();
         switch ($cmd->getName()){
@@ -40,7 +35,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         }
         return true;
     }
-
     public function mainFrom($player){
         $plugin = $this->getServer()->getPluginManager();
         $formapi = $plugin->getPlugin("FormAPI");
@@ -86,7 +80,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton(TextFormat::WHITE."Masks");
         $form->sendToPlayer($player);
     }
-
     public function weaponsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -99,39 +92,74 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 268;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 2500);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 2500) {
+                        $this->itemId = 268;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 2500);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 2:
-                    $this->itemId = 272;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 5000) {
+                        $this->itemId = 272;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
-                    $this->itemId = 267;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 267;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 4:
-                    $this->itemId = 283;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 283;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 5:
-                    $this->itemId = 276;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 276;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 6:
-                    $this->itemId = 261;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 2000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 2000) {
+                        $this->itemId = 261;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 2000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 7:
-                    $this->itemId = 262;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 3000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 3000) {
+                        $this->itemId = 262;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 3000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
             }
         });
@@ -150,7 +178,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Arrows(64x) : $3000", 0, "textures/items/arrow");
         $form->sendToPlayer($player);
     }
-
     public function toolsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -163,29 +190,54 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 278;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 278;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 2:
-                    $this->itemId = 285;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 285;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
-                    $this->itemId = 257;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 20000) {
+                        $this->itemId = 257;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 20000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 4:
-                    $this->itemId = 274;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 5000) {
+                        $this->itemId = 274;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 5:
-                    $this->itemId = 270;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 2500);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 2500) {
+                        $this->itemId = 270;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 2500);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
             }
         });
@@ -202,7 +254,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Wood Pickaxe : $2500", 0, "textures/items/wood_pickaxe");
         $form->sendToPlayer($player);
     }
-
     public function armorsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -215,104 +266,204 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 310;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 310;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 2:
-                    $this->itemId = 311;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 311;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
-                    $this->itemId = 312;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 312;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 4:
-                    $this->itemId = 313;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 313;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 5:
-                    $this->itemId = 302;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 302;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 6:
-                    $this->itemId = 303;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 303;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 7:
-                    $this->itemId = 304;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 304;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 8:
-                    $this->itemId = 305;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 305;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 9:
-                    $this->itemId = 306;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 17000) {
+                        $this->itemId = 306;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 10:
-                    $this->itemId = 307;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 17000) {
+                        $this->itemId = 307;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 11:
-                    $this->itemId = 308;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 17000) {
+                        $this->itemId = 308;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 12:
-                    $this->itemId = 309;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 17000) {
+                        $this->itemId = 309;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 17000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 13:
-                    $this->itemId = 314;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 12000) {
+                        $this->itemId = 314;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 14:
-                    $this->itemId = 315;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 12000) {
+                        $this->itemId = 315;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 15:
-                    $this->itemId = 316;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 12000) {
+                        $this->itemId = 317;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 16:
-                    $this->itemId = 317;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 12000) {
+                        $this->itemId = 317;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 12000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 17:
-                    $this->itemId = 298;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 298;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 18:
-                    $this->itemId = 299;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 299;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 19:
-                    $this->itemId = 300;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 300;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 20:
-                    $this->itemId = 301;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 201;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
             }
         });
@@ -349,7 +500,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Leather Boots : $10000", 0, "textures/items/leather_boots");
         $form->sendToPlayer($player);
     }
-
     public function specialitemsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -362,19 +512,34 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 322;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 20000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 20000) {
+                        $this->itemId = 466;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 20000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
-                case 2:
-                    $this->itemId = 466;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                case 13:
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 15000) {
+                        $this->itemId = 322;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 15000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
-                    $this->itemId = 396;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 396;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
             }
         });
@@ -389,7 +554,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Golden Carrot : $10000", 1, "https://www.digminecraft.com/food_recipes/images/golden_carrot.png");
         $form->sendToPlayer($player);
     }
-
     public function maskForm($player)
     {
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
@@ -403,14 +567,24 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 397;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 10000) {
+                        $this->itemId = 397;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 10000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 2:
-                    $this->itemId = 397;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
-                    EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 5000) {
+                        $this->itemId = 298;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
+                        EconomyAPI::getInstance()->reduceMoney($player, 5000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
                     $this->itemId = 397;
@@ -442,7 +616,6 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Skeleton : $1000", 1, "https://img4.hostingpics.net/pics/589367skullskeleton.png");
         $form->sendToPlayer($player);
     }
-
     public function blocksForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -455,54 +628,105 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     $this->mainFrom($player);
                     break;
                 case 1:
-                    $this->itemId = 1;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 1;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 2:
-                    $this->itemId = 17;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 17;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 3:
-                    $this->itemId = 20;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 20;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 4:
-                    $this->itemId = 24;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 24;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 5:
-                    $this->itemId = 45;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 45;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
+                    break;
                     break;
                 case 6:
-                    $this->itemId = 98;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 98;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 7:
-                    $this->itemId = 155;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 155;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 8:
-                    $this->itemId = 80;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 80;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 9:
-                    $this->itemId = 44;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 1;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
                 case 10:
-                    $this->itemId = 47;
-                    $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
-                    EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    $money = EconomyAPI::getInstance()->myMoney($player->getName());
+                    if ($money >= 25000) {
+                        $this->itemId = 44;
+                        $player->getInventory()->addItem(Item::get($this->itemId, 0, 64));
+                        EconomyAPI::getInstance()->reduceMoney($player, 25000);
+                    }else{
+                        $player->sendMessage("You Don't Have Enough Money.");
+                    }
                     break;
             }
         });
