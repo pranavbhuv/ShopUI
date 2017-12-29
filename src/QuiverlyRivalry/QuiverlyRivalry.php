@@ -1,41 +1,48 @@
 <?php
 namespace QuiverlyRivalry;
-# Main
+
+# Main uses:
 use pocketmine\{Player, Server};
 use pocketmine\plugin\PluginBase;
-#Utils
+#Utils uses:
 use pocketmine\utils\{TextFormat};
-#Item
+#Item uses:
 use pocketmine\item\Item;
 use pocketmine\item\enchantment\Enchantment;
-#Event
+#Event uses:
 use pocketmine\event\Listener;
-#Commands
+#Command uses:
 use pocketmine\command\{Command, CommandSender, CommandExecutor, ConsoleCommandSender};
 #Entity
 use pocketmine\entity\{Entity, Effect};
-#Player
+#Player uses:
 use pocketmine\event\player\{PlayerMoveEvent, PlayerJoinEvent, PlayerQuitEvent, PlayerExhaustEvent, PlayerInteractEvent, PlayerDropItemEvent};
-#API
+# Inventory uses:
+use pocketmine\inventory\Inventory;
+#API uses:
 use jojoe77777\FormAPI;
 use onebone\economyapi\EconomyAPI;
 
 class QuiverlyRivalry extends PluginBase implements Listener{
+
     public $nomoney = TextFormat::RED . "you do not have enough money!";
+
     public function onEnable(){
         $this->getLogger()->info("ShopUI by Quiverly! Remember I am a developer for hire!");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
+
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
         $player = $sender->getPlayer();
         switch ($cmd->getName()){
             case "shopui":
-                $this->mainFrom($player);
+                $this->mainForm($player);
                 break;
         }
         return true;
     }
-    public function mainFrom($player){
+
+    public function mainForm($player){
         $plugin = $this->getServer()->getPluginManager();
         $formapi = $plugin->getPlugin("FormAPI");
         $form = $formapi->createSimpleForm(function (Player $event, array $args){
@@ -66,6 +73,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     return;
             }
         });
+
         $form->setTitle(TextFormat::WHITE . "--= " . TextFormat::BOLD . TextFormat::GREEN . "CastleRaid" . TextFormat::RESET . TextFormat::WHITE . " =--");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -80,6 +88,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton(TextFormat::WHITE."Masks");
         $form->sendToPlayer($player);
     }
+
     public function weaponsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -89,7 +98,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch($result){
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -163,6 +172,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Weapons");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -178,6 +188,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Arrows(64x) : $3000", 0, "textures/items/arrow");
         $form->sendToPlayer($player);
     }
+
     public function toolsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -187,7 +198,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch($result){
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -241,6 +252,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Tools");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -254,6 +266,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Wood Pickaxe : $2500", 0, "textures/items/wood_pickaxe");
         $form->sendToPlayer($player);
     }
+
     public function armorsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -263,7 +276,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch($result){
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -458,7 +471,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                 case 20:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
                     if ($money >= 10000) {
-                        $this->itemId = 201;
+                        $this->itemId = 301;
                         $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
                         EconomyAPI::getInstance()->reduceMoney($player, 10000);
                     }else{
@@ -467,6 +480,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Armour");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -500,6 +514,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Leather Boots : $10000", 0, "textures/items/leather_boots");
         $form->sendToPlayer($player);
     }
+
     public function specialitemsForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -509,7 +524,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch($result){
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -543,6 +558,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Special Items");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -554,8 +570,8 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Golden Carrot : $10000", 1, "https://www.digminecraft.com/food_recipes/images/golden_carrot.png");
         $form->sendToPlayer($player);
     }
-    public function maskForm($player)
-    {
+
+    public function maskForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data) {
             $result = $data[0];
@@ -564,7 +580,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch ($result) {
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -603,6 +619,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Masks");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
@@ -616,6 +633,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
         $form->addButton("Skeleton : $1000", 1, "https://img4.hostingpics.net/pics/589367skullskeleton.png");
         $form->sendToPlayer($player);
     }
+
     public function blocksForm($player){
         $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $event, array $data){
@@ -625,7 +643,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
             }
             switch($result){
                 case 0:
-                    $this->mainFrom($player);
+                    $this->mainForm($player);
                     break;
                 case 1:
                     $money = EconomyAPI::getInstance()->myMoney($player->getName());
@@ -730,6 +748,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                     break;
             }
         });
+
         $form->setTitle("Blocks");
         $name = $player->getName();
         $eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
