@@ -106,6 +106,7 @@ class QuiverlyRivalry extends PluginBase implements Listener{
                         $this->itemId = 268;
                         $player->getInventory()->addItem(Item::get($this->itemId, 0, 1));
                         EconomyAPI::getInstance()->reduceMoney($player, 2500);
+                        $player->sendMessage("You bought a Wood Sword");
                     }else{
                         $player->sendMessage("You Don't Have Enough Money.");
                     }
