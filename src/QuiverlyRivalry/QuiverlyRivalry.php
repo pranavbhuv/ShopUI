@@ -30,6 +30,12 @@ class QuiverlyRivalry extends PluginBase implements Listener{
     public function onEnable(){
         $this->getLogger()->info("ShopUI by Quiverly! Remember I am a developer for hire!");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        
+        foreach(['FormAPI', 'EconomyAPI'] as $plugin){
+            if($this->getServer()->getPluginManager()->getPlugin($plugin) == null){
+                $this->setEnabled(false);
+            }
+        }
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
