@@ -2,9 +2,7 @@
 
 namespace QuiverlyRivalry;
 
-use pocketmine\command\{
-    Command, CommandSender
-};
+use pocketmine\command\{Command, CommandSender};
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
