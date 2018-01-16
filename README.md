@@ -1,5 +1,5 @@
 # ShopUI
-ShopUI is the first public, functioning shop ui plugin, by QuiverlyRivalry
+ShopUI is the first public, functioning ShopUI plugin, by QuiverlyRivalry, and @dapigguy (configuration)
 
 This is my first UI, plugin, I hope you enjoy it!
 
