@@ -55,8 +55,8 @@ items:
     - "98:0:64:Stone Bricks:25000:0:textures/items/bricks"
     - "155:0:64:Block of Quartz:25000:0:textures/items/quartz_block"
     - "88:0:64:Snow:25000:0:textures/items/snow"
-    - "44:0:64:Stone Slab:0:textures/items/stone_slab"
-    - "47:0:64:Bookshelf:0:textures/items/bookshelf"
+    - "44:0:64:Stone Slab:25000:0:textures/items/stone_slab"
+    - "47:0:64:Bookshelf:25000:0:textures/items/bookshelf"
   specials:
     - "466:0:1:Enchanted Apple:20000:1:https//www.digminecraft.com/food_recipes/images/golden_apple2.png"
     - "322:0:1:Golden Apple:15000:1:https//www.digminecraft.com/food_recipes/images/golden_apple.png"
