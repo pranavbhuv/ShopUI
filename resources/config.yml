@@ -1,6 +1,13 @@
 # Server Name
 name: CastleRaid
 
+# Messages
+# Tags: {amount}, {item}, {cost}, {missing}
+messages:
+  #Message sent when you buy an item
+  bought: "You have bought {amount} {item} for ${cost}"
+  not-enough-money: "You do not have enough money to buy {amount} {item}. You are missing ${missing}."
+
 # Items in each shop category.
 items:
   # Format for items is id:meta:amount:name:price:imgtype:imgpath (Note: imgtype and imgpath are optional. 0 is path, 1 is url)

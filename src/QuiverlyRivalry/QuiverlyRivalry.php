@@ -24,8 +24,6 @@ class QuiverlyRivalry extends PluginBase
 
     public $category;
 
-    public $nomoney = TextFormat::RED . "You do not have enough money!";
-
     public function onEnable()
     {
         foreach (['FormAPI', 'EconomyAPI'] as $depend) {
@@ -101,8 +99,27 @@ class QuiverlyRivalry extends PluginBase
                     if ($money >= $values[4]) {
                         $player->getInventory()->addItem(Item::get($values[0], $values[1], $values[2])->setCustomName($values[3]));
                         $this->economyapi->reduceMoney($player, $values[4]);
-                        $player->sendMessage("You have bought " . $values[2] . " " . $values[3] . " for $" . $values[4]);
-                    }
+                        $message = $this->getConfig()->getNested("messages.bought");
+                        $tags = [
+                            "{amount}" => $values[2],
+                            "{item}" => $values[3],
+                            "{cost}" => $values[4]
+                        ];
+                        foreach ($tags as $tag => $replacement){
+                            $message = str_replace($tag, $replacement, $message);
+                        }
+                        $player->sendMessage($message);
+                    } else {
+                        $message = $this->getConfig()->getNested("messages.not-enough-money");
+                        $tags = [
+                            "{amount}" => $values[2],
+                            "{item}" => $values[3],
+                            "{missing}" => $values[4] - $money
+                        ];
+                        foreach ($tags as $tag => $replacement){
+                            $message = str_replace($tag, $replacement, $message);
+                        }
+                        $player->sendMessage($message);                    }
                 } else {
                     $this->mainForm($player);
                 }
