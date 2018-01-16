@@ -1,7 +1,10 @@
 # ShopUI
-First Public, functioning ShopUI!
-A ShopUI, written by Quiv!
+ShopUI is the first public, functioning shop ui plugin, by QuiverlyRivalry
 
 This is my first UI, plugin, I hope you enjoy it!
-Special thanks to ArmTheDev for making a turtorial on this!
-This needs FormsAPI to run!
+
+### Requirements
+This plugin requires EconomyAPI & FormsAPI.
+
+### Credits
+Special thanks to ArmTheDev for making a tutorial on this!
