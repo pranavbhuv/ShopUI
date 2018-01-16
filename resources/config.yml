@@ -1,7 +1,69 @@
-#CONFIG FILE
-#TODO
+# Server Name
+name: CastleRaid
 
-#WHAT IS YOUR SERVER NAME
+# Messages
+# Tags: {amount}, {item}, {cost}, {missing}
+messages:
+  #Message sent when you buy an item
+  bought: "You have bought {amount} {item} for ${cost}"
+  not-enough-money: "You do not have enough money to buy {amount} {item}. You are missing ${missing}."
 
-Name: CASTLERAID
-
+# Items in each shop category.
+items:
+  # Format for items is id:meta:amount:name:price:imgtype:imgpath (Note: imgtype and imgpath are optional. 0 is path, 1 is url)
+  # For URLs, remove the : to prevent issues, the plugin will add it on its own.
+  weapons:
+    - "268:0:1:Wooden Sword:2500:0:textures/items/wood_sword"
+    - "272:0:1:Stone Sword:5000:0:textures/items/stone_sword"
+    - "267:0:1:Golden Sword:10000:0:textures/items/gold_sword"
+    - "283:0:1:Iron Sword:15000:0:textures/items/iron_sword"
+    - "276:0:1:Diamond Sword:25000:0:textures/items/diamond_sword"
+    - "261:0:1:Bow:2000:0:textures/items/bow_standby"
+    - "262:0:64:Arrow:3000:0:textures/items/arrow"
+  tools:
+    - "278:0:1:Diamond Pickaxe:25000:0:textures/items/diamond_pickaxe"
+    - "285:0:1:Golden Pickaxe:15000:0:textures/items/gold_pickaxe"
+    - "257:0:1:Iron Pickaxe:20000:0:textures/items/iron_pickaxe"
+    - "274:0:1:Stone Pickaxe:5000:0:textures/items/stone_pickaxe"
+    - "270:0:1:Wooden Pickaxe:2500:0:textures/items/wood_pickaxe"
+  armor:
+    - "310:0:1:Diamond Helmet:25000:0:textures/items/diamond_helmet"
+    - "311:0:1:Diamond Chestplate:25000:0:textures/items/diamond_chestplate"
+    - "312:0:1:Diamond Leggings:25000:0:textures/items/diamond_leggings"
+    - "313:0:1:Diamond Boots:25000:0:textures/items/diamond_boots"
+    - "302:0:1:Chain Helmet:15000:0:textures/items/chainmail_helmet"
+    - "303:0:1:Chain Chestplate:15000:0:textures/items/chainmail_chestplate"
+    - "304:0:1:Chain Leggings:15000:0:textures/items/chainmail_leggings"
+    - "305:0:1:Chain Boots:15000:0:textures/items/chainmail_boots"
+    - "306:0:1:Iron Helmet:17000:0:textures/items/iron_helmet"
+    - "307:0:1:Iron Chestplate:17000:0:textures/items/iron_chestplate"
+    - "308:0:1:Iron Leggings:17000:0:textures/items/iron_leggings"
+    - "309:0:1:Iron Boots:17000:0:textures/items/iron_boots"
+    - "314:0:1:Golden Helmet:12000:0:textures/items/gold_helmet"
+    - "315:0:1:Golden Chestplate:12000:0:textures/items/gold_chestplate"
+    - "316:0:1:Golden Leggings:12000:0:textures/items/gold_leggings"
+    - "317:0:1:Golden Boots:12000:0:textures/items/gold_boots"
+    - "298:0:1:Leather Cap:10000:0:textures/items/leather_helmet"
+    - "299:0:1:Leather Tunic:10000:0:textures/items/leather_chestplate"
+    - "300:0:1:Leather Pants:10000:0:textures/items/leather_leggings"
+    - "301:0:1:Leader Boots:10000:0:textures/items/leather_boots"
+  blocks:
+    - "1:0:64:Stone:25000:0:textures/items/stone"
+    - "17:0:64:Oak Wood:25000:0:textures/items/log"
+    - "20:0:64:Glass:25000:0:textures/items/glass"
+    - "24:0:64:Sandstone:25000:0:textures/items/sandstone"
+    - "98:0:64:Stone Bricks:25000:0:textures/items/bricks"
+    - "155:0:64:Block of Quartz:25000:0:textures/items/quartz_block"
+    - "88:0:64:Snow:25000:0:textures/items/snow"
+    - "44:0:64:Stone Slab:0:textures/items/stone_slab"
+    - "47:0:64:Bookshelf:0:textures/items/bookshelf"
+  specials:
+    - "466:0:1:Enchanted Apple:20000:1:https//www.digminecraft.com/food_recipes/images/golden_apple2.png"
+    - "322:0:1:Golden Apple:15000:1:https//www.digminecraft.com/food_recipes/images/golden_apple.png"
+    - "396:0:1:Golden Carrot:10000:1:https//www.digminecraft.com/food_recipes/images/golden_carrot.png"
+  masks:
+    - "397:0:1:Dragon Head:10000:1:https//img4.hostingpics.net/pics/436796skulldragon.png"
+    - "397:0:1:Wither Skeleton Skull:5000:1:https//img4.hostingpics.net/pics/826437skullwither.png"
+    - "397:0:4:Creeper Head:2000:1:https//img4.hostingpics.net/pics/556676skullcreeper.png"
+    - "397:0:2:Zombie Head:1000:1:https//img4.hostingpics.net/pics/415562skullzombie.png"
+    - "307:0:3:Skeleton Head:1000:1:https//img4.hostingpics.net/pics/589367skullskeleton.png"
