@@ -76,7 +76,7 @@ class QuiverlyRivalry extends PluginBase
             }
         });
 
-        $form->setTitle(TextFormat::WHITE . "--= " . TextFormat::BOLD . TextFormat::GREEN . "CastleRaid" . TextFormat::RESET . TextFormat::WHITE . " =--");
+        $form->setTitle(TextFormat::WHITE . "--= " . TextFormat::BOLD . TextFormat::GREEN . $this->getConfig()->getNested("name") . TextFormat::RESET . TextFormat::WHITE . " =--");
         $money = $this->economyapi->myMoney($player->getName());
         $form->setContent("Your Money: $" . $money);
         $form->addButton(TextFormat::WHITE . "Weapons");
@@ -113,7 +113,7 @@ class QuiverlyRivalry extends PluginBase
         $form->setContent("Your Money: " . $money);
         foreach ($this->$category as $item) {
             $values = explode(":", $item);
-            $form->addButton($values[3] . " : " . $values[4], isset($values[5]) ? $values[5] : -1, isset($values[6]) ? $values[6] : "");
+            $form->addButton($values[3] . " : " . $values[4], isset($values[5]) ? $values[5] : -1, isset($values[6]) ? str_replace("https//", "https://", $values[6]) : "");
         }
         $form->addButton("Back, to main menu!");
         $form->sendToPlayer($player);
