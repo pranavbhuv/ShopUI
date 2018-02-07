@@ -19,6 +19,8 @@ class QuiverlyRivalry extends PluginBase
     public $blocks = [];
     public $specials = [];
     public $masks = [];
+    public $mobs = [];
+    public $raiding = [];
 
     public $category;
 
@@ -35,7 +37,7 @@ class QuiverlyRivalry extends PluginBase
             $this->$name = $plugin;
         }
         $this->saveDefaultConfig();
-        foreach (["weapons", "tools", "armor", "blocks", "specials", "masks"] as $category) {
+        foreach (["weapons", "tools", "armor", "blocks", "specials", "masks", "mobs", "raiding"] as $category) {
             $this->$category = $this->getConfig()->getNested("items." . $category);
         }
         $this->getLogger()->info("ShopUI by Quiverly and a pig! Remember I am a developer for hire!");
@@ -60,7 +62,7 @@ class QuiverlyRivalry extends PluginBase
         $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
             if (isset($data[0])) {
                 $result = $data[0];
-                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks"];
+                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks", 6 => "mobs", 7 = "raiding"];
                 switch ($result) {
                     case 6:
                         return;
@@ -74,13 +76,15 @@ class QuiverlyRivalry extends PluginBase
 
         $form->setTitle(TextFormat::WHITE . "--= " . TextFormat::BOLD . TextFormat::GREEN . $this->getConfig()->getNested("name") . TextFormat::RESET . TextFormat::WHITE . " =--");
         $money = $this->economyapi->myMoney($player->getName());
-        $form->setContent("Your Money: $" . $money);
-        $form->addButton(TextFormat::WHITE . "Weapons");
-        $form->addButton(TextFormat::WHITE . "Tools");
-        $form->addButton(TextFormat::WHITE . "Armour");
-        $form->addButton(TextFormat::WHITE . "Blocks");
-        $form->addButton(TextFormat::WHITE . "Special Items");
-        $form->addButton(TextFormat::WHITE . "Masks");
+        $form->setContent("§5§lYour Money: §r§d$" . $money);
+        $form->addButton(TextFormat::GREEN . "Weapons");
+        $form->addButton(TextFormat::AQUA . "Tools");
+        $form->addButton(TextFormat::RED . "Armour");
+        $form->addButton(TextFormat::LIGHT_PURPLE . "Blocks");
+        $form->addButton(TextFormat::YELLOW . "Special Items");
+        $form->addButton(TextFormat::DARK_BLUE . "Masks");
+        $form->addButton(TextFormat::DARK_GREEN . "Mobs");
+        $form->addButton(TextFormat::DARK_RED . "Raiding");
         $form->addButton(TextFormat::GREEN . "Exit");
         $form->sendToPlayer($player);
     }
