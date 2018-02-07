@@ -44,7 +44,7 @@ class QuiverlyRivalry extends PluginBase
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
     {
         switch ($cmd->getName()) {
-            case "shopui":
+            case "shop":
                 if ($sender instanceof Player) {
                     $this->mainForm($sender);
                     return true;
@@ -125,12 +125,12 @@ class QuiverlyRivalry extends PluginBase
         });
         $form->setTitle(ucfirst($category));
         $money = $this->economyapi->myMoney($player->getName());
-        $form->setContent("Your Money: " . $money);
+        $form->setContent("§a§lYour Money: " . $money);
         foreach ($this->$category as $item) {
             $values = explode(":", $item);
             $form->addButton($values[3] . " : " . $values[4], isset($values[5]) ? $values[5] : -1, isset($values[6]) ? str_replace("https//", "https://", $values[6]) : "");
         }
-        $form->addButton("Back, to main menu!");
+        $form->addButton("§bBack to main menu!");
         $form->sendToPlayer($player);
     }
 
