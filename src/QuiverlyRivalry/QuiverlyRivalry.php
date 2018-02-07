@@ -62,7 +62,7 @@ class QuiverlyRivalry extends PluginBase
         $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
             if (isset($data[0])) {
                 $result = $data[0];
-                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks", 6 => "mobs", 7 = "raiding"];
+                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks", 6 => "mobs", 7 => "raiding"];
                 switch ($result) {
                     case 6:
                         return;
