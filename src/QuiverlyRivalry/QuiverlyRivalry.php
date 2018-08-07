@@ -29,7 +29,6 @@ class QuiverlyRivalry extends PluginBase
             if (is_null($plugin)) {
                 $this->getLogger()->error($depend . " is required to use this plugin.");
                 $this->setEnabled(false);
-                return false;
             }
             $this->$name = $plugin;
         }
