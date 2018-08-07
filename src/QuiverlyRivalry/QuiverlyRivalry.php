@@ -19,13 +19,10 @@ class QuiverlyRivalry extends PluginBase
     public $blocks = [];
     public $specials = [];
     public $masks = [];
-    public $mobs = [];
-    public $raiding = [];
 
     public $category;
 
-    public function onEnable()
-    {
+    public function onEnable() : void{
         foreach (['FormAPI', 'EconomyAPI'] as $depend) {
             $plugin = $this->getServer()->getPluginManager()->getPlugin($depend);
             $name = strtolower($depend);
@@ -37,16 +34,15 @@ class QuiverlyRivalry extends PluginBase
             $this->$name = $plugin;
         }
         $this->saveDefaultConfig();
-        foreach (["weapons", "tools", "armor", "blocks", "specials", "masks", "mobs", "raiding"] as $category) {
+        foreach (["weapons", "tools", "armor", "blocks", "specials", "masks"] as $category) {
             $this->$category = $this->getConfig()->getNested("items." . $category);
         }
         $this->getLogger()->info("ShopUI by Quiverly and a pig! Remember I am a developer for hire!");
     }
 
-    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
-    {
+    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool {
         switch ($cmd->getName()) {
-            case "shop":
+            case "shopui":
                 if ($sender instanceof Player) {
                     $this->mainForm($sender);
                     return true;
@@ -57,12 +53,11 @@ class QuiverlyRivalry extends PluginBase
         return true;
     }
 
-    public function mainForm(Player $player)
-    {
-        $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
+    public function mainForm(Player $player){
+        $form = $this->formapi->createSimpleForm(function (Player $player, $data = null) {
             if (isset($data[0])) {
                 $result = $data[0];
-                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks", 6 => "mobs", 7 => "raiding"];
+                $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks"];
                 switch ($result) {
                     case 6:
                         return;
@@ -76,22 +71,20 @@ class QuiverlyRivalry extends PluginBase
 
         $form->setTitle(TextFormat::WHITE . "--= " . TextFormat::BOLD . TextFormat::GREEN . $this->getConfig()->getNested("name") . TextFormat::RESET . TextFormat::WHITE . " =--");
         $money = $this->economyapi->myMoney($player->getName());
-        $form->setContent("§5§lYour Money: §r§d$" . $money);
-        $form->addButton(TextFormat::GREEN . "Weapons");
-        $form->addButton(TextFormat::AQUA . "Tools");
-        $form->addButton(TextFormat::RED . "Armour");
-        $form->addButton(TextFormat::LIGHT_PURPLE . "Blocks");
-        $form->addButton(TextFormat::YELLOW . "Special Items");
-        $form->addButton(TextFormat::DARK_BLUE . "Masks");
-        $form->addButton(TextFormat::DARK_GREEN . "Mobs");
-        $form->addButton(TextFormat::DARK_RED . "Raiding");
+        $form->setContent("Your Money: $" . $money);
+        $form->addButton(TextFormat::WHITE . "Weapons");
+        $form->addButton(TextFormat::WHITE . "Tools");
+        $form->addButton(TextFormat::WHITE . "Armour");
+        $form->addButton(TextFormat::WHITE . "Blocks");
+        $form->addButton(TextFormat::WHITE . "Special Items");
+        $form->addButton(TextFormat::WHITE . "Masks");
         $form->addButton(TextFormat::GREEN . "Exit");
         $form->sendToPlayer($player);
     }
 
     public function categoryForm(Player $player, $category)
     {
-        $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
+        $form = $this->formapi->createSimpleForm(function (Player $player, $data = null) {
             if (isset($data[0])) {
                 $category = $this->category[$player->getLowerCaseName()];
                 if ($data[0] < count($this->$category)) {
@@ -129,12 +122,12 @@ class QuiverlyRivalry extends PluginBase
         });
         $form->setTitle(ucfirst($category));
         $money = $this->economyapi->myMoney($player->getName());
-        $form->setContent("§a§lYour Money: " . $money);
+        $form->setContent("Your Money: " . $money);
         foreach ($this->$category as $item) {
             $values = explode(":", $item);
             $form->addButton($values[3] . " : " . $values[4], isset($values[5]) ? $values[5] : -1, isset($values[6]) ? str_replace("https//", "https://", $values[6]) : "");
         }
-        $form->addButton("§bBack to main menu!");
+        $form->addButton("Back, to main menu!");
         $form->sendToPlayer($player);
     }
 

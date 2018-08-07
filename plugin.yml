@@ -1,9 +1,9 @@
 name: ShopUI
 main: QuiverlyRivalry\QuiverlyRivalry
-version: 1.0.3
-api: [3.0.0-ALPHA10, 3.0.0-ALPHA11]
+version: 1.1.0
+api: [3.0.0, 4.0.0]
 author: QuiverlyRivalry
 
 commands:
- shop:
+ shopui:
   description: "Access the UI for Shops!"
