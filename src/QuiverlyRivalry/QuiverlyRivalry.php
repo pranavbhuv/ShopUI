@@ -22,15 +22,13 @@ class QuiverlyRivalry extends PluginBase
 
     public $category;
 
-    public function onEnable()
-    {
+    public function onEnable() : void{
         foreach (['FormAPI', 'EconomyAPI'] as $depend) {
             $plugin = $this->getServer()->getPluginManager()->getPlugin($depend);
             $name = strtolower($depend);
             if (is_null($plugin)) {
                 $this->getLogger()->error($depend . " is required to use this plugin.");
                 $this->setEnabled(false);
-                return false;
             }
             $this->$name = $plugin;
         }
@@ -41,8 +39,7 @@ class QuiverlyRivalry extends PluginBase
         $this->getLogger()->info("ShopUI by Quiverly and a pig! Remember I am a developer for hire!");
     }
 
-    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
-    {
+    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool {
         switch ($cmd->getName()) {
             case "shopui":
                 if ($sender instanceof Player) {
@@ -55,9 +52,8 @@ class QuiverlyRivalry extends PluginBase
         return true;
     }
 
-    public function mainForm(Player $player)
-    {
-        $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
+    public function mainForm(Player $player){
+        $form = $this->formapi->createSimpleForm(function (Player $player, $data = null) {
             if (isset($data[0])) {
                 $result = $data[0];
                 $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks"];
@@ -87,7 +83,7 @@ class QuiverlyRivalry extends PluginBase
 
     public function categoryForm(Player $player, $category)
     {
-        $form = $this->formapi->createSimpleForm(function (Player $player, array $data) {
+        $form = $this->formapi->createSimpleForm(function (Player $player, $data = null) {
             if (isset($data[0])) {
                 $category = $this->category[$player->getLowerCaseName()];
                 if ($data[0] < count($this->$category)) {
