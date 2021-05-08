@@ -36,7 +36,7 @@ class QuiverlyRivalry extends PluginBase
         foreach (["weapons", "tools", "armor", "blocks", "specials", "masks"] as $category) {
             $this->$category = $this->getConfig()->getNested("items." . $category);
         }
-        $this->getLogger()->info("ShopUI by Quiverly and a pig! Remember I am a developer for hire!");
+        $this->getLogger()->info("Enabled.");
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool {
